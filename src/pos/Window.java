@@ -6,16 +6,18 @@ import java.awt.event.*;
 
 public class Window extends JFrame {
 	
+	private listener buttonListener;
+	
 	/* Startup Screen */
 	private JButton startPOS;
 	private JButton shutdown;
 	
 	/* Order Screen */
-	private JTextField orderList;
+	public JTextField orderList;
 	
-	private JButton whataburger;
-	private JButton dblWhataburger;
-	private JButton trplWhataburger;
+	public JButton whataburger;
+	public JButton dblWhataburger;
+	public JButton trplWhataburger;
 	
 	public Window() {
 		super("Whataburger POS");
@@ -28,18 +30,37 @@ public class Window extends JFrame {
 		
 		listener buttonListener = new listener();
 		startPOS.addActionListener(buttonListener);
+		
+		JTextField orderList = new JTextField("test");
+		
+		JButton whataburger = new JButton("Whataburger");
+		JButton dblWhataburger = new JButton("Double Meat Whataburger");
+		JButton trplWhataburger = new JButton("Triple Meat Whataburger");
+		
+		add(whataburger);
+		
+		whataburger.addActionListener(buttonListener);
 	}
 	
-	private class listener implements ActionListener {
+	public class listener<Jbutton> implements ActionListener {
 		
 		public void actionPerformed(ActionEvent event) {
 			
-			if(event.getSource() == startPOS || event.getSource() == whataburger) {
-				remove(startPOS);
+			if((JButton)event.getSource() == startPOS || (JButton)event.getSource() == whataburger) {
 				remove(shutdown);
 				revalidate();
 				repaint();
-				setUpOrderScreen();
+				JTextField orderList = new JTextField("test");
+				
+				JButton whataburger = new JButton("Whataburger");
+				JButton dblWhataburger = new JButton("Double Meat Whataburger");
+				JButton trplWhataburger = new JButton("Triple Meat Whataburger");
+				
+				add (orderList);
+				
+				add(whataburger);
+				add(dblWhataburger);
+				add(trplWhataburger);
 			}
 			
 			if(event.getSource() == shutdown) {
@@ -50,22 +71,8 @@ public class Window extends JFrame {
 		}
 	}
 		
-	public void setUpOrderScreen() {
+	public void loadOrderScreen() {
 		
-		JTextField orderList = new JTextField("test");
-			
-		JButton whataburger = new JButton("Whataburger");
-		JButton dblWhataburger = new JButton("Double Meat Whataburger");
-		JButton trplWhataburger = new JButton("Triple Meat Whataburger");
-		
-		add (orderList);
-		
-		add(whataburger);
-		add(dblWhataburger);
-		add(trplWhataburger);
-		
-		listener orderListener = new listener();
-		whataburger.addActionListener(orderListener);
 		
 	}
 }
